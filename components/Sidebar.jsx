@@ -6,7 +6,8 @@ import {
     ClipboardListIcon,
     BellIcon,
     UserIcon,
-    DotsCircleHorizontalIcon
+    DotsCircleHorizontalIcon,
+    DotsHorizontalIcon
 } from "@heroicons/react/outline"
 import Image from "next/image"
 
@@ -25,8 +26,24 @@ export default function Sidebar() {
                 <SidebarLink Icon={BookmarkIcon} text={"Bookmarks"} />
                 <SidebarLink Icon={UserIcon} text={"Profile"} />
                 <SidebarLink Icon={DotsCircleHorizontalIcon} text={"More"} />
-                <button className="hidden xl:inline bg-[#1d9bf0] rounded-full mt-2 h-[52px] w-[250px] text-lg font-bold text-white">Post</button>
-            <div className="absolute bottom-0">User</div>
+                <button className="hidden xl:inline bg-[#1d9bf0] rounded-full
+                 mt-2 h-[52px] w-[250px] text-lg font-bold text-white">
+                    Post
+                </button>
+                <div className="absolute bottom-4 flex justify-between xl:w-[250px] items-center
+                 space-x-3 xl:p-3 hover:bg-black hover:bg-opacity-10
+                 rounded-full cursor-pointer">
+                    <div className="flex items-center space-x-3">
+                        <img
+                            src="/assets/pfp.png"
+                            className="w-10 h-10 rounded-full object-cover" />
+                        <div className="hidden xl:inline">
+                            <h1 className="font-bold whitespace-nowrap">name</h1>
+                            <h1 className="text-gray-500">@username</h1>
+                        </div>
+                    </div>
+                    <DotsHorizontalIcon className="h-5 hidden xl:inline" />
+                </div>
             </nav>
         </div>
     )

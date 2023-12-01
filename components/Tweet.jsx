@@ -8,7 +8,7 @@ export default function Tweet() {
                 <ChatIcon className="w-5 cursor-pointer hover:text-[#1d9bf0]" />
                 <HeartIcon className="w-5 cursor-pointer hover:text-pink-500" />
                 <ChartBarIcon className="w-5 cursor-not-allowed hover:text-green-400" />
-                <UploadIcon className="w-5 cursor-not-allowed hover:text-green-400" />
+                <UploadIcon className="w-5 cursor-not-allowed hover:text-[#1d9bf0]" />
             </div>
         </div>
     )
