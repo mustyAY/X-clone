@@ -5,7 +5,7 @@ const initialState = {
     name: null,
     email: null,
     uid: null,
-    photoUrl: null
+    photoURL: null
 }
 
 const userSlice = createSlice({
@@ -17,7 +17,7 @@ const userSlice = createSlice({
         state.name = action.payload.name,
         state.email = action.payload.email,
         state.uid = action.payload.uid,
-        state.photoUrl = action.payload.photoUrl
+        state.photoURL = action.payload.photoURL
     },
 
     signOutUser: (state) => {
@@ -25,7 +25,7 @@ const userSlice = createSlice({
         state.name = null,
         state.email = null,
         state.uid = null,
-        state.photoUrl = null
+        state.photoURL = null
     }
 
   }

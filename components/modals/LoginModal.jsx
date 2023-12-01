@@ -1,5 +1,8 @@
+import { auth } from "@/firebase";
 import { closeLoginModal, openLoginModal } from "@/redux/modalSlice";
 import Modal from "@mui/material/Modal";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 
 
@@ -7,7 +10,17 @@ export default function LoginModal() {
 
     const isOpen = useSelector(state => state.modals.loginModalOpen);
     const dispatch = useDispatch();
-    console.log(isOpen)
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    async function handleSignIn() {
+        await  signInWithEmailAndPassword(auth, email, password);
+    };
+
+    async function handleGuestSignIn() {
+        await  signInWithEmailAndPassword(auth, "guest253363@gmail.com", "Oo14253363xa");
+    };
 
     return (
 
@@ -21,7 +34,7 @@ export default function LoginModal() {
 
             <Modal
                 open={isOpen}
-                onClick={() => dispatch(closeLoginModal())}
+                onClose={() => dispatch(closeLoginModal())}
                 className="flex justify-center items-center"
             >
                 <div
@@ -32,18 +45,24 @@ export default function LoginModal() {
                         <input
                             type="email"
                             placeholder="Email"
+                            onChange={e => setEmail(e.target.value)}
                             className="h-10 mt-8 rounded-md bg-transparent border border-gray-700 p-6"
                         />
                         <input
                             type="password"
                             placeholder="Password"
+                            onChange={e => setPassword(e.target.value)}
                             className="h-10 mt-8 rounded-md bg-transparent border border-gray-700 p-6"
                         />
-                        <button className="bg-black text-white mt-8 w-full rounded-full font-bold text-lg p-2">
+                        <button 
+                        onClick={handleSignIn}
+                        className="bg-black text-white mt-8 w-full rounded-full font-bold text-lg p-2">
                             Sign In
                         </button>
                         <h1 className="text-center mt-4 font-bold">or</h1>
-                        <button className="bg-black text-white mt-4 w-full rounded-full font-bold text-lg p-2">
+                        <button 
+                        onClick={handleGuestSignIn}
+                        className="bg-black text-white mt-4 w-full rounded-full font-bold text-lg p-2">
                             Sign In as Guest
                         </button>
                     </div>
@@ -51,4 +70,4 @@ export default function LoginModal() {
             </Modal>
         </>
     )
-}
+};

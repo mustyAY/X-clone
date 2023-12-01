@@ -1,3 +1,4 @@
+import { db } from "@/firebase";
 import {
     CalendarIcon,
     ChartBarIcon,
@@ -8,8 +9,29 @@ import {
     PhotographIcon,
     SelectorIcon
 } from "@heroicons/react/outline";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function TweetInput() {
+
+    const user = useSelector(state => state.user);
+
+    const [text, setText] = useState("");
+
+    async function sendTweet() {
+        const docRef = await addDoc(collection(db, "posts"), {
+            username: user.username,
+            name: user.name,
+            photoURL: user.photoURL,
+            uid: user.uid,
+            timestamp: serverTimestamp(),
+            likes: [],
+            tweet: text
+        });
+        setText("");
+    }
+
     return (
         <div className="flex space-x-3 p-3 border-b border-gray-200">
             <img
@@ -18,8 +40,11 @@ export default function TweetInput() {
             />
             <div className="w-full">
                 <textarea
+                    placeholder="What is happening?!"
+                    value={text}
+                    onChange={e => setText(e.target.value)}
                     className="bg-transparent resize-none outline-none w-full min-h-[50px] text-lg xl:text-xl"
-                    placeholder="What is happening?!" />
+                />
 
 
                 <div className="flex justify-between border-t border-gray-200 pt-4">
@@ -47,7 +72,11 @@ export default function TweetInput() {
                         </div>
                     </div>
 
-                    <button className="bg-[#1d9bf0] rounded-full px-4 py-1.5 text-white font-bold">
+                    <button 
+                    onClick={sendTweet}
+                    disabled={!text}
+                    className="bg-[#1d9bf0] rounded-full px-4 py-1.5
+                     text-white font-bold disabled:opacity-50">
                         Post
                     </button>
                 </div>

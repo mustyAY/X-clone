@@ -1,3 +1,6 @@
+import { auth } from "@/firebase";
+import { closeLoginModal, closeSignupModal } from "@/redux/modalSlice";
+import { signOutUser } from "@/redux/userSlice";
 import {
     HomeIcon,
     InboxIcon,
@@ -8,10 +11,23 @@ import {
     UserIcon,
     DotsCircleHorizontalIcon,
     DotsHorizontalIcon
-} from "@heroicons/react/outline"
-import Image from "next/image"
+} from "@heroicons/react/outline";
+import { signOut } from "firebase/auth";
+import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Sidebar() {
+
+    const dispatch = useDispatch();
+
+    const user = useSelector(state => state.user);
+    
+    async function handleSignOut() {
+        await signOut(auth);
+        dispatch(signOutUser());
+        dispatch(closeSignupModal());
+        dispatch(closeLoginModal());
+    };
     return (
         <div className="h-full hidden sm:flex flex-col fixed sm:ml-[8px] xl:ml-[64px]">
             <nav className="h-full relative xl:space-y-1.5 mx-auto">
@@ -30,16 +46,18 @@ export default function Sidebar() {
                  mt-2 h-[52px] w-[250px] text-lg font-bold text-white">
                     Post
                 </button>
-                <div className="absolute bottom-4 flex justify-between xl:w-[250px] items-center
+                <div 
+                onClick={handleSignOut}
+                className="absolute bottom-4 flex justify-between xl:w-[250px] items-center
                  space-x-3 xl:p-3 hover:bg-black hover:bg-opacity-10
                  rounded-full cursor-pointer">
                     <div className="flex items-center space-x-3">
                         <img
-                            src="/assets/pfp.png"
+                            src={user.photoURL || "/assets/Xpfp.jpeg"}
                             className="w-10 h-10 rounded-full object-cover" />
                         <div className="hidden xl:inline">
-                            <h1 className="font-bold whitespace-nowrap">name</h1>
-                            <h1 className="text-gray-500">@username</h1>
+                            <h1 className="font-bold whitespace-nowrap">{user.name}</h1>
+                            <h1 className="text-gray-500">@{user.username}</h1>
                         </div>
                     </div>
                     <DotsHorizontalIcon className="h-5 hidden xl:inline" />
@@ -47,7 +65,7 @@ export default function Sidebar() {
             </nav>
         </div>
     )
-}
+};
 
 function SidebarLink({ text, Icon }) {
     return (
@@ -56,4 +74,4 @@ function SidebarLink({ text, Icon }) {
             <span className="hidden xl:inline">{text}</span>
         </li>
     )
-}
+};
