@@ -1,12 +1,40 @@
+import { db } from "@/firebase";
 import { closeCommentModal } from "@/redux/modalSlice";
-import { CalendarIcon, ChartSquareBarIcon, EmojiHappyIcon, LocationMarkerIcon, PhotographIcon } from "@heroicons/react/outline";
+import { CalendarIcon, ChartSquareBarIcon, EmojiHappyIcon, LocationMarkerIcon, PhotographIcon, XIcon } from "@heroicons/react/outline";
 import Modal from "@mui/material/Modal";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function CommentModal() {
 
     const isOpen = useSelector(state => state.modals.commentModalOpen);
+    const userImg = useSelector(state => state.user.photoURL);
+    const tweetDetails = useSelector(state => state.modals.commentTweetDetails);
+    const user = useSelector(state => state.user);
     const dispatch = useDispatch();
+
+    const [comment, setComment] = useState("");
+
+    const router = useRouter();
+
+    async function sendComment() {
+
+        const docRef = doc(db, "posts", tweetDetails.id);
+        const commentDetails = {
+            username: user.username,
+            name: user.name,
+            photoURL: user.photoURL,
+            comment: comment
+        }
+        await updateDoc(docRef, {
+            comments: arrayUnion(commentDetails)
+        })
+
+        dispatch(closeCommentModal());
+        router.push(`/${tweetDetails.id}`);
+    }
 
     return (
         <>
@@ -17,32 +45,43 @@ export default function CommentModal() {
             >
                 <div className="bg-white w-full h-full sm:w-[600px] sm:h-[350px]
                 rounded-xl outline-none px-4 pt-10 sm:py-10 relative">
-                    <div>
+                    <div className="absolute w-[2px] h-[60px] bg-gray-300 left-[40px] top-[112px]"></div>
+                    <div
+                        onClick={() => dispatch(closeCommentModal())}
+                        className="absolute left-4 top-4 cursor-pointer 
+                    hover:bg-black hover:bg-opacity-10 rounded-full p-1"
+                    >
+                        <XIcon className="w-5" />
+                    </div>
+                    <div className="mt-6">
                         <div className="flex space-x-3">
-                            <img src="/assets/Xpfp.jpeg" alt=""
+                            <img src={tweetDetails.photoURL} alt=""
                                 className="w-12 h-12 object-cover rounded-full"
                             />
                             <div>
                                 <div className="flex space-x-1.5">
-                                    <h1 className="font-bold">X</h1>
-                                    <h1 className="text-gray-500">@X</h1>
+                                    <h1 className="font-bold">{tweetDetails.name}</h1>
+                                    <h1 className="text-gray-500">@{tweetDetails.username}</h1>
                                 </div>
-                                <p className="mt-1">This is awesome</p>
+                                <p className="mt-1">{tweetDetails.tweet}</p>
                                 <h1 className="text-gray-500 text-[15px] mt-2">
                                     Replying to
-                                    <span className="text-[#1d9bf0] ml-1">@X</span>
+                                    <span className="text-[#1d9bf0] ml-1">
+                                        @{tweetDetails.username}
+                                    </span>
                                 </h1>
                             </div>
                         </div>
                     </div>
                     <div className="mt-11">
                         <div className="flex space-x-3">
-                            <img src="/assets/Xpfp.jpeg" alt=""
+                            <img src={userImg} alt=""
                                 className="w-12 h-12 object-cover rounded-full"
                             />
                             <div className="w-full">
                                 <textarea
                                     placeholder="Post your reply"
+                                    onChange={e => setComment(e.target.value)}
                                     className="w-full outline-none resize-none text-lg" />
                                 <div className="flex justify-between">
                                     <div className="flex sm:absolute sm:bottom-4 sm:left-2">
@@ -68,8 +107,8 @@ export default function CommentModal() {
                                         </div>
                                     </div>
                                     <button
-                                        // onClick={sendTweet}
-                                        // disabled={!text}
+                                        onClick={sendComment}
+                                        disabled={!comment}
                                         className="bg-[#1d9bf0] rounded-full px-4 py-1.5
                                      text-white font-bold disabled:opacity-50 sm:absolute sm:right-4 sm:bottom-4"
                                     >

@@ -46,7 +46,6 @@ export default function SignupModal() {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             if (!currentUser) return;
-            console.log(currentUser);
 
             dispatch(signInUser(
                 {
@@ -60,9 +59,7 @@ export default function SignupModal() {
 
         });
 
-        return () => {
-            unsubscribe;
-        }
+        return unsubscribe;
     }, []);
 
 
