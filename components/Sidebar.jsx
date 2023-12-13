@@ -29,7 +29,7 @@ export default function Sidebar() {
         dispatch(closeLoginModal());
     };
     return (
-        <div className="h-full hidden sm:flex flex-col fixed sm:ml-[8px] xl:ml-[64px]">
+        <div className="h-full flex flex-col fixed ml-[8px] xl:ml-[64px]">
             <nav className="h-full relative xl:space-y-1.5 mx-auto">
                 <div className="flex justify-center items-center xl:justify-start py-3 xl:p-3">
                     <Image src={"/assets/Xlogo.png"} width={34} height={34} alt="" />
