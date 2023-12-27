@@ -24,27 +24,27 @@ export default function Trending() {
                 </div>
                 <div className="relative p-3">
                     <DotsHorizontalIcon className="absolute right-4 w-5 text-gray-400" />
-                    <p className="text-xs text-gray-400">Trending in Nigeria</p>
-                    <h1 className="text-[15px] font-bold">Petroleum Prices</h1>
-                    <p className="text-xs text-gray-400">340k posts</p>
+                    <p className="text-xs text-gray-400">Trending in Sports</p>
+                    <h1 className="text-[15px] font-bold">Leo Messi</h1>
+                    <p className="text-xs text-gray-400">500k posts</p>
                 </div>
                 <div className="relative p-3">
                     <DotsHorizontalIcon className="absolute right-4 w-5 text-gray-400" />
-                    <p className="text-xs text-gray-400">Trending in Nigeria</p>
-                    <h1 className="text-[15px] font-bold">Petroleum Prices</h1>
-                    <p className="text-xs text-gray-400">340k posts</p>
+                    <p className="text-xs text-gray-400">Trending in Tech</p>
+                    <h1 className="text-[15px] font-bold">Musty's Sick Portfolio</h1>
+                    <p className="text-xs text-gray-400">800k posts</p>
                 </div>
                 <div className="relative p-3">
                     <DotsHorizontalIcon className="absolute right-4 w-5 text-gray-400" />
-                    <p className="text-xs text-gray-400">Trending in Nigeria</p>
-                    <h1 className="text-[15px] font-bold">Petroleum Prices</h1>
-                    <p className="text-xs text-gray-400">340k posts</p>
+                    <p className="text-xs text-gray-400">Trending on X</p>
+                    <h1 className="text-[15px] font-bold">New Media Feature</h1>
+                    <p className="text-xs text-gray-400">1M posts</p>
                 </div>
                 <div className="relative p-3">
                     <DotsHorizontalIcon className="absolute right-4 w-5 text-gray-400" />
-                    <p className="text-xs text-gray-400">Trending in Nigeria</p>
-                    <h1 className="text-[15px] font-bold">Petroleum Prices</h1>
-                    <p className="text-xs text-gray-400">340k posts</p>
+                    <p className="text-xs text-gray-400">Trending in Fashion</p>
+                    <h1 className="text-[15px] font-bold">Fashion Week Paris</h1>
+                    <p className="text-xs text-gray-400">200k posts</p>
                 </div>
             </div>
             <div className="w-[350px] h-[300px] bg-black bg-opacity-5 rounded-3xl mt-3">
@@ -70,13 +70,13 @@ export default function Trending() {
                     <div className="flex space-x-3">
                         <img
                             className="w-11 h-11 object-cover rounded-full"
-                            src="/assets/pfp.png" />
+                            src="/assets/Xpfp.jpeg" />
                         <div>
                             <div className="flex space-x-1">
-                                <h1 className="font-bold">Elon Musk</h1>
+                                <h1 className="font-bold">X</h1>
                                 <BadgeCheckIcon className="w-[18px] text-blue-400" />
                             </div>
-                            <h1 className="text-[16px] text-gray-500">@Musk</h1>
+                            <h1 className="text-[16px] text-gray-500">@X</h1>
                         </div>
                     </div>
                     <button className="bg-black rounded-3xl text-white text-sm w-20 h-8 font-bold">
@@ -87,13 +87,13 @@ export default function Trending() {
                     <div className="flex space-x-3">
                         <img
                             className="w-11 h-11 object-cover rounded-full"
-                            src="/assets/pfp.png" />
+                            src="/assets/profilePictures/pfp5.png" />
                         <div>
                             <div className="flex space-x-1">
-                                <h1 className="font-bold">Elon Musk</h1>
+                                <h1 className="font-bold">Monkey D. Luffy</h1>
                                 <BadgeCheckIcon className="w-[18px] text-blue-400" />
                             </div>
-                            <h1 className="text-[16px] text-gray-500">@Musk</h1>
+                            <h1 className="text-[16px] text-gray-500">@Luffy</h1>
                         </div>
                     </div>
                     <button className="bg-black rounded-3xl text-white text-sm w-20 h-8 font-bold">
